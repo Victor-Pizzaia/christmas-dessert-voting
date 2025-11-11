@@ -7,5 +7,5 @@ import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserDTO
 public interface UserUseCase {
     UserDTO createUser(UserRequestDTO user);
 
-    UserDTO getUser(UserId userId);
+    UserDTO findUserById(UserId userId);
 }

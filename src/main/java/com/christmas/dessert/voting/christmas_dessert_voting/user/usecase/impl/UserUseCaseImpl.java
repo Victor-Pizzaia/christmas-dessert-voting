@@ -40,13 +40,13 @@ public class UserUseCaseImpl implements UserUseCase {
                 userRequest.favoriteSweets());
 
         userRepository.save(newUser);
-        log.info("Sucess on creating user: {}", newUser.getId());
+        log.info("Success on creating user: {}", newUser.getId());
 
         return new UserDTO(userRequest.name(), userRequest.favoriteSweets());
     }
 
     @Override
-    public UserDTO getUser(UserId userId) {
+    public UserDTO findUserById(UserId userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found: " + userId, 404));
         return UserMapper.INSTANCE.userToUserDto(user);

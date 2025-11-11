@@ -3,6 +3,9 @@ package com.christmas.dessert.voting.christmas_dessert_voting.user.web;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserDTO;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserId;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserRequestDTO;
+import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.auth.LoginRequest;
+import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.auth.LoginResponse;
+import com.christmas.dessert.voting.christmas_dessert_voting.user.service.AuthService;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.usecase.UserUseCase;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserUseCase userUseCase;
+    private final AuthService authService;
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@Validated @RequestBody UserRequestDTO userRequestDTO) {
@@ -33,6 +37,12 @@ public class UserController {
         log.info("Getting user information request received");
         String userId = authentication.getName();
 
-        return new ResponseEntity<>(userUseCase.getUser(new UserId(userId)), HttpStatus.OK);
+        return new ResponseEntity<>(userUseCase.findUserById(new UserId(userId)), HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Validated @RequestBody LoginRequest loginRequest) {
+        log.info("User login request received");
+        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 }
