@@ -10,14 +10,14 @@ import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserDTO
 import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.UserId;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.usecase.UserUseCase;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserUseCaseImpl implements UserUseCase {
 
     private final UserRepository userRepository;

@@ -8,13 +8,13 @@ import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.excepti
 import com.christmas.dessert.voting.christmas_dessert_voting.user.service.AuthService;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.service.PasswordEncoderService;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final JwtProvider jwtProvider;
