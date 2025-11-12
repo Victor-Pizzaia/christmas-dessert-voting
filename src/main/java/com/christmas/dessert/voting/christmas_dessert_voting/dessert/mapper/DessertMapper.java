@@ -11,9 +11,7 @@ import java.util.List;
 @Mapper
 public interface DessertMapper {
     DessertMapper INSTANCE = Mappers.getMapper( DessertMapper.class );
-    @Mapping(target = "id", source = "dessert.id.id")
-    @Mapping(target = "name", source = "dessert.name")
-    @Mapping(target = "description", source = "dessert.description")
+    @Mapping(target = "id", source = "id.id")
     DessertDTO dessertToDessertDTO(Dessert dessert);
     List<DessertDTO> dessertsToDessertDTOs(List<Dessert> desserts);
 }
