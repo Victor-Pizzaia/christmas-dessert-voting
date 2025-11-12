@@ -4,11 +4,11 @@ import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.User;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.domain.exception.UserNotFoundException;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.infrastructure.UserRepository;
 import com.christmas.dessert.voting.christmas_dessert_voting.user.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
