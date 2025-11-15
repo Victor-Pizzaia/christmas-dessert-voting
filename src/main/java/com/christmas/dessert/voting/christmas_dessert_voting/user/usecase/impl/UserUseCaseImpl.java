@@ -48,7 +48,7 @@ public class UserUseCaseImpl implements UserUseCase {
     @Override
     public UserDTO findUserById(UserId userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found: " + userId, 404));
+                .orElseThrow(() -> new UserNotFoundException("User not found: " + userId));
         return UserMapper.INSTANCE.userToUserDto(user);
     }
 }

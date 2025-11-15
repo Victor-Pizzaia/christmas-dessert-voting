@@ -16,6 +16,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByIdentifier(String identifier) {
         return userRepository.findUserByEmailOrCpf(identifier)
-                .orElseThrow(() -> new UserNotFoundException("User %s not found".formatted(identifier), 404));
+                .orElseThrow(() -> new UserNotFoundException("User %s not found".formatted(identifier)));
     }
 }
