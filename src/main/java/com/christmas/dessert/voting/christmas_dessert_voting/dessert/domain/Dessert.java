@@ -21,11 +21,13 @@ public class Dessert {
     @AttributeOverride(name = "id", column = @Column(name = "owner_id"))
     private OwnerId ownerId;
     @Setter
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Setter
     @Column
     private String description;
+    @Column(name = "is_subscribed")
+    private boolean isSubscribed;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
@@ -47,5 +49,6 @@ public class Dessert {
         this.ownerId = ownerId;
         this.name = name;
         this.description = description;
+        this.isSubscribed = false;
     }
 }
