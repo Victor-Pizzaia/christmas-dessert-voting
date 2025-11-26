@@ -11,3 +11,20 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+  christmas-service:
+    image: 'christmas-dessert-voting'
+    container_name: christmas_app
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+    depends_on:
+      - postgres
