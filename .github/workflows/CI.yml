@@ -37,14 +37,6 @@ jobs:
       - name: Build
         run: mvn -B -V -T 1C clean verify
 
-      - name: Run SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          organization: "pizzaia-dev"
-          projectKey: "Victor-Pizzaia_christmas-dessert-voting"
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
       - name: Upload built jar (artifact)
         uses: actions/upload-artifact@v4
         with:
