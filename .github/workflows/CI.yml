@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ["master"]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      jar-path: ${{ steps.upload.outputs.artifact-path }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21 (Corretto)
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          cache: 'maven'
+
+      - name: Cache Maven repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Build
+        run: mvn -B -V -T 1C clean verify
+
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          organization: "pizzaia-dev"
+          projectKey: "Victor-Pizzaia_christmas-dessert-voting"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Upload built jar (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: christmas-jar
+          path: target/*.jar
+          retention-days: 7
