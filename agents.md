@@ -149,6 +149,12 @@ Backlog ──(refinamento PO + Dev Sênior)──► Ready ──(iniciar desen
 - Após aprovação, fazer **merge** para `master`
 - Mover a issue para **Done**
 
+### 6. Pós-Done (limpeza)
+- Deletar a branch remota: `git push origin --delete <branch-name>`
+- Deletar a branch local: `git branch -d <branch-name>`
+- Checkout para `master`: `git checkout master`
+- Atualizar com upstream: `git pull origin master`
+
 ---
 
 ## 🏷️ Prioridades
