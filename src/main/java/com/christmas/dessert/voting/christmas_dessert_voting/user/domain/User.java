@@ -22,11 +22,11 @@ public class User {
     @EmbeddedId
     @EqualsAndHashCode.Include
     private UserId id;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 14)
     private String cpf;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
     @Column(name = "password", nullable = false)
     private String passwordHash;

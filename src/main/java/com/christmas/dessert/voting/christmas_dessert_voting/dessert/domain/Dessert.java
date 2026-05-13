@@ -21,7 +21,7 @@ public class Dessert {
     @AttributeOverride(name = "id", column = @Column(name = "owner_id"))
     private OwnerId ownerId;
     @Setter
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String name;
     @Setter
     @Column
