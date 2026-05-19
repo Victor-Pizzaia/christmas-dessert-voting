@@ -31,7 +31,7 @@ class DessertUseCaseImplTest {
 
     @Test
     void shouldRegisterDessertSuccessfully() {
-        DessertRequestDTO dessertRequestDTO = new DessertRequestDTO("Chocolate Cake", "Delicious chocolate cake");
+        DessertRequestDTO dessertRequestDTO = new DessertRequestDTO("Chocolate Cake", "Delicious chocolate cake", "Bake at 180°C");
         OwnerId ownerId = new OwnerId();
 
         dessertUseCase.registerDessert(dessertRequestDTO, ownerId);
@@ -39,6 +39,7 @@ class DessertUseCaseImplTest {
         verify(dessertRepository).save(argThat(savedDessert ->
                 savedDessert.getName().equals("Chocolate Cake") &&
                         savedDessert.getDescription().equals("Delicious chocolate cake") &&
+                        savedDessert.getRecipe().equals("Bake at 180°C") &&
                         savedDessert.getOwnerId().equals(ownerId)
         ));
     }
@@ -47,8 +48,8 @@ class DessertUseCaseImplTest {
     void shouldFindAllDessertsForOwner() {
         OwnerId ownerId = new OwnerId();
         List<Dessert> desserts = List.of(
-                new Dessert(new DessertId(), ownerId, "Chocolate Cake", "Delicious"),
-                new Dessert(new DessertId(), ownerId, "Apple Pie", "Tasty")
+                new Dessert(new DessertId(), ownerId, "Chocolate Cake", "Delicious", null),
+                new Dessert(new DessertId(), ownerId, "Apple Pie", "Tasty", null)
         );
         when(dessertRepository.findAllByOwnerId(ownerId)).thenReturn(desserts);
 
@@ -68,7 +69,7 @@ class DessertUseCaseImplTest {
     @Test
     void shouldFindDessertByIdSuccessfully() {
         DessertId dessertId = new DessertId();
-        Dessert dessert = new Dessert(dessertId, new OwnerId(), "Chocolate Cake", "Delicious");
+        Dessert dessert = new Dessert(dessertId, new OwnerId(), "Chocolate Cake", "Delicious", null);
         when(dessertRepository.findById(dessertId)).thenReturn(Optional.of(dessert));
 
         dessertUseCase.findDessertById(dessertId);
@@ -80,15 +81,16 @@ class DessertUseCaseImplTest {
     void shouldUpdateDessertSuccessfully() {
         DessertId dessertId = new DessertId();
         OwnerId ownerId = new OwnerId();
-        DessertRequestDTO dessertRequestDTO = new DessertRequestDTO("Updated Cake", "Updated description");
-        Dessert existingDessert = new Dessert(dessertId, ownerId, "Old Cake", "Old description");
+        DessertRequestDTO dessertRequestDTO = new DessertRequestDTO("Updated Cake", "Updated description", null);
+        Dessert existingDessert = new Dessert(dessertId, ownerId, "Old Cake", "Old description", null);
         when(dessertRepository.findById(dessertId)).thenReturn(Optional.of(existingDessert));
 
         dessertUseCase.updateDessert(dessertId, dessertRequestDTO, ownerId);
 
         verify(dessertRepository).save(argThat(updatedDessert ->
                 updatedDessert.getName().equals("Updated Cake") &&
-                        updatedDessert.getDescription().equals("Updated description")
+                        updatedDessert.getDescription().equals("Updated description") &&
+                        updatedDessert.getRecipe() == null
         ));
     }
 }
