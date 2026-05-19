@@ -21,11 +21,14 @@ public class Dessert {
     @AttributeOverride(name = "id", column = @Column(name = "owner_id"))
     private OwnerId ownerId;
     @Setter
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
     @Setter
     @Column
     private String description;
+    @Setter
+    @Column
+    private String recipe;
     @Column(name = "is_subscribed")
     private boolean isSubscribed;
     @Column(name = "created_at")
@@ -44,11 +47,12 @@ public class Dessert {
         this.updatedAt = LocalDateTime.now();
     }
 
-    public Dessert(DessertId id, OwnerId ownerId, String name, String description) {
+    public Dessert(DessertId id, OwnerId ownerId, String name, String description, String recipe) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
         this.description = description;
+        this.recipe = recipe;
         this.isSubscribed = false;
     }
 }

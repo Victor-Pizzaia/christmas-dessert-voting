@@ -1,8 +1,9 @@
 CREATE TABLE desserts (
     id UUID PRIMARY KEY,
     owner_id UUID NOT NULL,
-    name VARCHAR(100) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
     description TEXT,
+    recipe TEXT,
     is_subscribed BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,

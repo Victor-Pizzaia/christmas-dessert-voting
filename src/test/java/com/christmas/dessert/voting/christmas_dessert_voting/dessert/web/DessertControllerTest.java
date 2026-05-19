@@ -40,8 +40,8 @@ class DessertControllerTest {
     @BeforeEach
     public void setUp() {
         when(authentication.getName()).thenReturn(ownerId.id().toString());
-        this.dessertRequestDTO = new DessertRequestDTO("Tiramisu", "Classic Italian dessert with coffee and mascarpone");
-        this.dessertDTO = new DessertDTO(new DessertId().id().toString(), "Tiramisu", "Classic Italian dessert with coffee and mascarpone");
+        this.dessertRequestDTO = new DessertRequestDTO("Tiramisu", "Classic Italian dessert with coffee and mascarpone", null);
+        this.dessertDTO = new DessertDTO(new DessertId().id().toString(), "Tiramisu", "Classic Italian dessert with coffee and mascarpone", null);
     }
 
     @Test

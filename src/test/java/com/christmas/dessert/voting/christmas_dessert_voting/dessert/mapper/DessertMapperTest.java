@@ -24,7 +24,7 @@ class DessertMapperTest {
 
     @BeforeEach
     public void setUp() {
-        this.dessert = new Dessert(new DessertId(), new OwnerId(), "Chocolate Cake", "Delicious");
+        this.dessert = new Dessert(new DessertId(), new OwnerId(), "Chocolate Cake", "Delicious", "Bake at 180°C for 30 min");
     }
 
     @Test
@@ -35,6 +35,7 @@ class DessertMapperTest {
         assertEquals(dessert.getId().id().toString(), dessertDTO.id());
         assertEquals(dessert.getName(), dessertDTO.name());
         assertEquals(dessert.getDescription(), dessertDTO.description());
+        assertEquals(dessert.getRecipe(), dessertDTO.recipe());
     }
 
     @Test
@@ -49,7 +50,7 @@ class DessertMapperTest {
 
     @Test
     void shouldMapDessertListToDessertDTOList() {
-        Dessert dessert2 = new Dessert(new DessertId(), new OwnerId(), "Apple Pie", "Tasty");
+        Dessert dessert2 = new Dessert(new DessertId(), new OwnerId(), "Apple Pie", "Tasty", null);
         List<Dessert> desserts = List.of(dessert, dessert2);
 
         List<DessertDTO> dessertDTOs = dessertMapper.dessertsToDessertDTOs(desserts);
@@ -62,6 +63,7 @@ class DessertMapperTest {
         assertEquals(dessert.getId().id().toString(), dessertDTO1.id());
         assertEquals(dessert.getName(), dessertDTO1.name());
         assertEquals(dessert.getDescription(), dessertDTO1.description());
+        assertEquals(dessert.getRecipe(), dessertDTO1.recipe());
         assertEquals(dessert2.getId().id().toString(), dessertDTO2.id());
         assertEquals(dessert2.getName(), dessertDTO2.name());
         assertEquals(dessert2.getDescription(), dessertDTO2.description());

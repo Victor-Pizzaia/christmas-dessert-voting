@@ -26,7 +26,8 @@ public class DessertUseCaseImpl implements DessertUseCase {
                 new DessertId(),
                 ownerId,
                 dessertRequestDTO.name(),
-                dessertRequestDTO.description());
+                dessertRequestDTO.description(),
+                dessertRequestDTO.recipe());
 
         dessertRepository.save(newDessert);
         log.debug("Success on registering dessert: {}", newDessert.getId());
@@ -59,6 +60,7 @@ public class DessertUseCaseImpl implements DessertUseCase {
                 .orElseThrow(() -> new DessertNotFoundException("Dessert not found: " + id));
         dessert.setName(dessertRequestDTO.name());
         dessert.setDescription(dessertRequestDTO.description());
+        dessert.setRecipe(dessertRequestDTO.recipe());
 
         dessertRepository.save(dessert);
     }
